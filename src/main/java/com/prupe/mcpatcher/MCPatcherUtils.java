@@ -25,22 +25,13 @@ public class MCPatcherUtils {
     private static File minecraftDir;
     private static File gameDir;
 
-    public static final String EXTENDED_HD = "Extended HD";
-    public static final String HD_FONT = "HD Font";
-    public static final String RANDOM_MOBS = "Random Mobs";
     public static final String CUSTOM_COLORS = "Custom Colors";
     public static final String CONNECTED_TEXTURES = "Connected Textures";
-    public static final String BETTER_SKIES = "Better Skies";
-    public static final String BETTER_GLASS = "Better Glass";
     public static final String CUSTOM_ITEM_TEXTURES = "Custom Item Textures";
-    public static final String CUSTOM_ANIMATIONS = "Custom Animations";
-    public static final String MIPMAP = "Mipmap";
-
-    public static final String RENDER_PASS_CLASS = "com.prupe.mcpatcher.renderpass.RenderPass";
 
     public static final String BLANK_PNG_FORMAT = "blank_%08x.png";
 
-    private static final Logger log = LogManager.getLogger();
+    public static final Logger log = LogManager.getLogger();
 
     private MCPatcherUtils() {}
 

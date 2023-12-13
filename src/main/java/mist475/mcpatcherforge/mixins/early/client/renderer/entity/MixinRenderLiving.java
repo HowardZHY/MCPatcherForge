@@ -13,8 +13,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import com.prupe.mcpatcher.mob.LineRenderer;
-
 @Mixin(RenderLiving.class)
 public abstract class MixinRenderLiving extends RendererLivingEntity {
 
@@ -70,62 +68,59 @@ public abstract class MixinRenderLiving extends RendererLivingEntity {
             double d16 = (float) (d9 - d13);
             double d17 = (float) (d10 - d14);
             double d18 = (float) (d11 - d15);
-            // patch start (only change is if-wrapper)
-            if (!LineRenderer.renderLine(1, x, y, z, d16, d17, d18)) {
-                GL11.glDisable(GL11.GL_TEXTURE_2D);
-                GL11.glDisable(GL11.GL_LIGHTING);
-                GL11.glDisable(GL11.GL_CULL_FACE);
-                tessellator.startDrawing(5);
-                int i;
-                float f2;
+            GL11.glDisable(GL11.GL_TEXTURE_2D);
+            GL11.glDisable(GL11.GL_LIGHTING);
+            GL11.glDisable(GL11.GL_CULL_FACE);
+            tessellator.startDrawing(5);
+            int i;
+            float f2;
 
-                for (i = 0; i <= 24; ++i) {
-                    if (i % 2 == 0) {
-                        tessellator.setColorRGBA_F(0.5F, 0.4F, 0.3F, 1.0F);
-                    } else {
-                        tessellator.setColorRGBA_F(0.35F, 0.28F, 0.21000001F, 1.0F);
-                    }
-
-                    f2 = (float) i / 24.0F;
-                    tessellator.addVertex(
-                        x + d16 * (double) f2 + 0.0D,
-                        y + d17 * (double) (f2 * f2 + f2) * 0.5D + (double) ((24.0F - (float) i) / 18.0F + 0.125F),
-                        z + d18 * (double) f2);
-                    tessellator.addVertex(
-                        x + d16 * (double) f2 + 0.025D,
-                        y + d17 * (double) (f2 * f2 + f2) * 0.5D
-                            + (double) ((24.0F - (float) i) / 18.0F + 0.125F)
-                            + 0.025D,
-                        z + d18 * (double) f2);
+            for (i = 0; i <= 24; ++i) {
+                if (i % 2 == 0) {
+                    tessellator.setColorRGBA_F(0.5F, 0.4F, 0.3F, 1.0F);
+                } else {
+                    tessellator.setColorRGBA_F(0.35F, 0.28F, 0.21000001F, 1.0F);
                 }
 
-                tessellator.draw();
-                tessellator.startDrawing(5);
-
-                for (i = 0; i <= 24; ++i) {
-                    if (i % 2 == 0) {
-                        tessellator.setColorRGBA_F(0.5F, 0.4F, 0.3F, 1.0F);
-                    } else {
-                        tessellator.setColorRGBA_F(0.35F, 0.28F, 0.21000001F, 1.0F);
-                    }
-
-                    f2 = (float) i / 24.0F;
-                    tessellator.addVertex(
-                        x + d16 * (double) f2 + 0.0D,
-                        y + d17 * (double) (f2 * f2 + f2) * 0.5D
-                            + (double) ((24.0F - (float) i) / 18.0F + 0.125F)
-                            + 0.025D,
-                        z + d18 * (double) f2);
-                    tessellator.addVertex(
-                        x + d16 * (double) f2 + 0.025D,
-                        y + d17 * (double) (f2 * f2 + f2) * 0.5D + (double) ((24.0F - (float) i) / 18.0F + 0.125F),
-                        z + d18 * (double) f2 + 0.025D);
-                }
-
-                tessellator.draw();
-                GL11.glEnable(GL11.GL_LIGHTING);
-                GL11.glEnable(GL11.GL_TEXTURE_2D);
+                f2 = (float) i / 24.0F;
+                tessellator.addVertex(
+                    x + d16 * (double) f2 + 0.0D,
+                    y + d17 * (double) (f2 * f2 + f2) * 0.5D + (double) ((24.0F - (float) i) / 18.0F + 0.125F),
+                    z + d18 * (double) f2);
+                tessellator.addVertex(
+                    x + d16 * (double) f2 + 0.025D,
+                    y + d17 * (double) (f2 * f2 + f2) * 0.5D
+                        + (double) ((24.0F - (float) i) / 18.0F + 0.125F)
+                        + 0.025D,
+                    z + d18 * (double) f2);
             }
+
+            tessellator.draw();
+            tessellator.startDrawing(5);
+
+            for (i = 0; i <= 24; ++i) {
+                if (i % 2 == 0) {
+                    tessellator.setColorRGBA_F(0.5F, 0.4F, 0.3F, 1.0F);
+                } else {
+                    tessellator.setColorRGBA_F(0.35F, 0.28F, 0.21000001F, 1.0F);
+                }
+
+                f2 = (float) i / 24.0F;
+                tessellator.addVertex(
+                    x + d16 * (double) f2 + 0.0D,
+                    y + d17 * (double) (f2 * f2 + f2) * 0.5D
+                        + (double) ((24.0F - (float) i) / 18.0F + 0.125F)
+                        + 0.025D,
+                    z + d18 * (double) f2);
+                tessellator.addVertex(
+                    x + d16 * (double) f2 + 0.025D,
+                    y + d17 * (double) (f2 * f2 + f2) * 0.5D + (double) ((24.0F - (float) i) / 18.0F + 0.125F),
+                    z + d18 * (double) f2 + 0.025D);
+            }
+
+            tessellator.draw();
+            GL11.glEnable(GL11.GL_LIGHTING);
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
             // patch end
             GL11.glEnable(GL11.GL_CULL_FACE);
         }

@@ -1,18 +1,16 @@
 package mist475.mcpatcherforge.mixins.early.client;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.Proxy;
-
-import javax.imageio.ImageIO;
-
+import com.google.common.collect.Multimap;
+import com.prupe.mcpatcher.MCPatcherUtils;
+import com.prupe.mcpatcher.cit.CITUtils;
+import com.prupe.mcpatcher.mal.resource.TexturePackChangeHandler;
+import com.prupe.mcpatcher.mal.tile.TileLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
-
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -21,15 +19,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.google.common.collect.Multimap;
-import com.prupe.mcpatcher.MCPatcherUtils;
-import com.prupe.mcpatcher.cc.Colorizer;
-import com.prupe.mcpatcher.cit.CITUtils;
-import com.prupe.mcpatcher.ctm.CTMUtils;
-import com.prupe.mcpatcher.hd.FontUtils;
-import com.prupe.mcpatcher.mal.resource.TexturePackChangeHandler;
-import com.prupe.mcpatcher.mal.tile.TileLoader;
-import com.prupe.mcpatcher.mob.MobRandomizer;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+import java.net.Proxy;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
@@ -58,11 +51,7 @@ public abstract class MixinMinecraft {
             ordinal = 0))
     private void modifyStartGame1(CallbackInfo ci) {
         TileLoader.init();
-        CTMUtils.reset();
         CITUtils.init();
-        FontUtils.init();
-        MobRandomizer.init();
-        Colorizer.init();
     }
 
     @Inject(

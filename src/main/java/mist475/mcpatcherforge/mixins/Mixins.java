@@ -16,90 +16,28 @@ public enum Mixins {
         .setApplyIf(() -> true)
         .addTargetedMod(TargetedMod.VANILLA)
         .addMixinClasses(
-            "block.material.MixinMapColor",
-
-            "block.MixinBlock",
-            "block.MixinBlockDoublePlant",
-            "block.MixinBlockGrass",
-            "block.MixinBlockLeaves",
-            "block.MixinBlockLilyPad",
-            "block.MixinBlockLiquid",
-            "block.MixinBlockMycelium",
-            "block.MixinBlockOldLeaf",
-            "block.MixinBlockRedstoneWire",
-            "block.MixinBlockReed",
-            "block.MixinBlockStem",
-            "block.MixinBlockTallGrass",
-            "block.MixinBlockVine",
-
-            "client.gui.MixinFontRenderer",
-
-            "client.particle.MixinEffectRenderer",
-            "client.particle.MixinEntityAuraFX",
-            "client.particle.MixinEntityBubbleFX",
-            "client.particle.MixinEntityDropParticleFX",
-            "client.particle.MixinEntityPortalFX",
-            "client.particle.MixinEntityRainFX",
-            "client.particle.MixinEntityRedDustFX",
-            "client.particle.MixinEntitySplashFX",
-            "client.particle.MixinEntitySuspendFX",
-
-            "client.renderer.entity.MixinRender",
             "client.renderer.entity.MixinRenderBiped",
-            "client.renderer.entity.MixinRenderEnderman",
             "client.renderer.entity.MixinRenderEntityLiving",
-            "client.renderer.entity.MixinRenderFish",
             "client.renderer.entity.MixinRenderItem",
             "client.renderer.entity.MixinRenderLiving",
-            "client.renderer.entity.MixinRenderMooshroom",
             "client.renderer.entity.MixinRenderPlayer",
-            "client.renderer.entity.MixinRenderSheep",
             "client.renderer.entity.MixinRenderSnowball",
-            "client.renderer.entity.MixinRenderSnowMan",
-            "client.renderer.entity.MixinRenderSpider",
-            "client.renderer.entity.MixinRenderWolf",
-            "client.renderer.entity.MixinRenderXPOrb",
 
             "client.renderer.texture.MixinAbstractTexture",
             "client.renderer.texture.MixinTextureAtlasSprite",
-            "client.renderer.texture.MixinTextureClock",
-            "client.renderer.texture.MixinTextureCompass",
-            "client.renderer.texture.MixinTextureManager",
             "client.renderer.texture.MixinTextureMap",
 
-            "client.renderer.tileentity.MixinTileEntitySignRenderer",
-
-            "client.renderer.MixinEntityRenderer",
             "client.renderer.MixinItemRenderer",
-            "client.renderer.renderblocks.MixinRenderBlocks",
-            "client.renderer.renderblocks.MixinRenderBlocksRenderBlockLiquid",
-            "client.renderer.MixinRenderGlobal",
-            "client.renderer.MixinWorldRenderer",
 
             "client.resources.MixinSimpleReloadableResourceManager",
 
             "client.MixinMinecraft",
 
-            "entity.MixinEntityList",
-            "entity.MixinEntityLivingBase",
-
-            "item.crafting.MixinRecipesArmorDyes",
-
             "item.MixinItem",
-            "item.MixinItemArmor",
-            "item.MixinItemBlock",
-            "item.MixinItemMonsterPlacer",
 
             "nbt.MixinNBTTagCompound",
-            "nbt.MixinNBTTagList",
-
-            "potion.MixinPotion",
-            "potion.MixinPotionHelper",
-
-            "world.MixinWorld",
-            "world.MixinWorldProvider",
-            "world.MixinWorldProviderEnd",
-            "world.MixinWorldProviderHell"));
+            "nbt.MixinNBTTagList"
+        ));
 
     public final String name;
     public final List<String> mixinClasses;

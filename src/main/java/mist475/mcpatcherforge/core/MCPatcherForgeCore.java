@@ -12,8 +12,6 @@ import org.apache.logging.log4j.Logger;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
-import mist475.mcpatcherforge.asm.AsmTransformers;
-import mist475.mcpatcherforge.asm.mappings.Namer;
 import mist475.mcpatcherforge.mixins.Mixins;
 
 /**
@@ -24,8 +22,6 @@ import mist475.mcpatcherforge.mixins.Mixins;
 public class MCPatcherForgeCore implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     public static final Logger log = LogManager.getLogger("MCPatcher");
-
-    private String[] transformerClasses;
 
     @Override
     public String getMixinConfig() {
@@ -51,11 +47,7 @@ public class MCPatcherForgeCore implements IFMLLoadingPlugin, IEarlyMixinLoader 
 
     @Override
     public String[] getASMTransformerClass() {
-        if (transformerClasses == null) {
-            Namer.initNames();
-            transformerClasses = AsmTransformers.getTransformers();
-        }
-        return transformerClasses;
+        return new String[0];
     }
 
     @Override
