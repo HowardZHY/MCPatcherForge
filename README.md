@@ -12,6 +12,8 @@ If you find issues feel free to report, but it might take a while before I get a
 
 Known issue:
 
+Incompatibility with https://github.com/quentin452/Multithreadingandtweaks, it @Overwrites methods used by this mod.
+
 Items with golden in its name like golden_horse_armor or golden_hoe didn't show with default name, you have to use following format like below:
 
 items=minecraft:golden_hoe
