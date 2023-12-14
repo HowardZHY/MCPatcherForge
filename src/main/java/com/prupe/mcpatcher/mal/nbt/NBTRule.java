@@ -14,8 +14,8 @@ import net.minecraft.nbt.NBTTagLong;
 import net.minecraft.nbt.NBTTagShort;
 import net.minecraft.nbt.NBTTagString;
 
-import mist475.mcpatcherforge.mixins.interfaces.NBTTagCompoundExpansion;
-import mist475.mcpatcherforge.mixins.interfaces.NBTTagListExpansion;
+import mist475.mcpatcherforge.interfaces.NBTTagCompoundExpansion;
+import mist475.mcpatcherforge.interfaces.NBTTagListExpansion;
 
 abstract public class NBTRule {
 

@@ -10,25 +10,30 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
-
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+import org.spongepowered.asm.launch.MixinBootstrap;
+import org.spongepowered.asm.mixin.MixinEnvironment;
+
 import mist475.mcpatcherforge.mixins.Mixins;
 
 /**
  * Adapted from Hodgepodge
  */
-@IFMLLoadingPlugin.MCVersion("1.7.10")
-@IFMLLoadingPlugin.TransformerExclusions("mist475.mcpatcherforge.asm")
 public class MCPatcherForgeCore implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     public static final Logger log = LogManager.getLogger("MCPatcher");
+
+    public MCPatcherForgeCore() {
+        MixinBootstrap.init();
+        MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
+        org.spongepowered.asm.mixin.Mixins.addConfiguration("mixins.mcpatcherforge.late.json");
+    }
 
     @Override
     public String getMixinConfig() {
         return "mixins.mcpatcherforge.early.json";
     }
 
-    @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
         final List<String> mixins = new ArrayList<>();
         final List<String> notLoading = new ArrayList<>();

@@ -31,7 +31,7 @@ import net.minecraft.util.ResourceLocation;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 
-import mist475.mcpatcherforge.mixins.interfaces.AbstractTextureExpansion;
+import mist475.mcpatcherforge.interfaces.AbstractTextureExpansion;
 
 public class TexturePackAPI {
 

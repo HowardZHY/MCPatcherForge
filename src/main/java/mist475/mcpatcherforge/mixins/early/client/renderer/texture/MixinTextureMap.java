@@ -2,6 +2,7 @@ package mist475.mcpatcherforge.mixins.early.client.renderer.texture;
 
 import java.util.Map;
 
+import com.gtnewhorizon.gtnhmixins.LateMixin;
 import net.minecraft.client.renderer.texture.AbstractTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;

@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.interfaces;
+package mist475.mcpatcherforge.interfaces;
 
 public interface AbstractTextureExpansion {
 

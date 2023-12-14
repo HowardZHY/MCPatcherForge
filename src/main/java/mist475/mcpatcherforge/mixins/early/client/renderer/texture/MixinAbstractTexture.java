@@ -6,7 +6,7 @@ import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-import mist475.mcpatcherforge.mixins.interfaces.AbstractTextureExpansion;
+import mist475.mcpatcherforge.interfaces.AbstractTextureExpansion;
 
 @Mixin(AbstractTexture.class)
 public abstract class MixinAbstractTexture implements AbstractTextureExpansion {

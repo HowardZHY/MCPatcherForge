@@ -1,9 +1,6 @@
 package mist475.mcpatcherforge.mixins;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Supplier;
 
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
@@ -39,6 +36,14 @@ public enum Mixins {
             "nbt.MixinNBTTagList"
         ));
 
+    /*OPTIFINE(new Builder("All the late mixins!").setSide(Side.CLIENT)
+        .setPhase(Phase.LATE)
+        .setApplyIf(() -> true)
+        .addTargetedMod(TargetedMod.OPTIFINE)
+        .addMixinClasses(
+            "MixinTextureMap"
+        ));*/
+
     public final String name;
     public final List<String> mixinClasses;
     private final Supplier<Boolean> applyIf;
@@ -46,6 +51,22 @@ public enum Mixins {
     private final Side side;
     public final List<TargetedMod> targetedMods;
     public final List<TargetedMod> excludedMods;
+
+    public static List<String> getLateMixins(Set<String> loadedMods) {
+        final List<String> mixins = new ArrayList<>();
+        final List<String> notLoading = new ArrayList<>();
+        for (Mixins mixin : Mixins.values()) {
+            if (mixin.phase == Phase.LATE) {
+                if (mixin.shouldLoad(Collections.emptySet(), loadedMods)) {
+                    mixins.addAll(mixin.mixinClasses);
+                } else {
+                    notLoading.addAll(mixin.mixinClasses);
+                }
+            }
+        }
+        System.out.print("Not loading the following LATE mixins: "+ notLoading.toString());
+        return mixins;
+    }
 
     private static class Builder {
 
