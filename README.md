@@ -11,5 +11,12 @@ Original source code is under MIT, changes by mist475 are lgpl 3.0
 If you find issues feel free to report, but it might take a while before I get around to it.
 
 Known issue:
-- Items with golden in its name like golden_horse_armor or golden_hoe didn't show with default name, you have to use items=minecraft:golden_hoe in the item's properties.
+
+Items with golden in its name like golden_horse_armor or golden_hoe didn't show with default name, you have to use following format like below:
+
+items=minecraft:golden_hoe
+
+texture=golden_hoe
+
+In the item's properties.
 
