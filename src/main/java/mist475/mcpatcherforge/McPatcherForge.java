@@ -3,7 +3,7 @@ package mist475.mcpatcherforge;
 import cpw.mods.fml.common.Mod;
 
 @Mod(
-    modid = "citreworked",
+    modid = "cit",
     version = "preview-1.7.10",
     name = Tags.MODNAME,
     acceptedMinecraftVersions = "*",

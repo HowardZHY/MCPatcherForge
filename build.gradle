@@ -234,15 +234,15 @@ if (usesMixins.toBoolean()) {
     targetPackageJava = javaSourceDir + modGroupPath + "/" + mixinPackagePath
     targetPackageScala = scalaSourceDir + modGroupPath + "/" + mixinPackagePath
     if (!(getFile(targetPackageJava).exists() || getFile(targetPackageScala).exists() || getFile(targetPackageKotlin).exists())) {
-        throw new GradleException("Could not resolve \"mixinsPackage\"! Could not find " + targetPackageJava + " or " + targetPackageScala + " or " + targetPackageKotlin)
+        throw new GradleException("Could not resolve \"mixinsPackage\"! Could not find " + targetPackageJava + " or " + targetPackageScala)
     }
 
     if (!mixinPlugin.isEmpty()) {
         String targetFileJava = javaSourceDir + modGroupPath + "/" + mixinPluginPath + ".java"
         String targetFileScala = scalaSourceDir + modGroupPath + "/" + mixinPluginPath + ".scala"
         String targetFileScalaJava = scalaSourceDir + modGroupPath + "/" + mixinPluginPath + ".java"
-        if (!(getFile(targetFileJava).exists() || getFile(targetFileScala).exists() || getFile(targetFileScalaJava).exists() || getFile(targetFileKotlin).exists())) {
-            throw new GradleException("Could not resolve \"mixinPlugin\"! Could not find " + targetFileJava + " or " + targetFileScala + " or " + targetFileScalaJava + " or " + targetFileKotlin)
+        if (!(getFile(targetFileJava).exists() || getFile(targetFileScala).exists() || getFile(targetFileScalaJava).exists())) {
+            throw new GradleException("Could not resolve \"mixinPlugin\"! Could not find " + targetFileJava + " or " + targetFileScala + " or " + targetFileScalaJava)
         }
     }
 }
@@ -252,8 +252,8 @@ if (coreModClass) {
     String targetFileJava = javaSourceDir + modGroupPath + "/" + coreModPath + ".java"
     String targetFileScala = scalaSourceDir + modGroupPath + "/" + coreModPath + ".scala"
     String targetFileScalaJava = scalaSourceDir + modGroupPath + "/" + coreModPath + ".java"
-    if (!(getFile(targetFileJava).exists() || getFile(targetFileScala).exists() || getFile(targetFileScalaJava).exists() || getFile(targetFileKotlin).exists())) {
-        throw new GradleException("Could not resolve \"coreModClass\"! Could not find " + targetFileJava + " or " + targetFileScala + " or " + targetFileScalaJava + " or " + targetFileKotlin)
+    if (!(getFile(targetFileJava).exists() || getFile(targetFileScala).exists() || getFile(targetFileScalaJava).exists())) {
+        throw new GradleException("Could not resolve \"coreModClass\"! Could not find " + targetFileJava + " or " + targetFileScala + " or " + targetFileScalaJava)
     }
 }
 

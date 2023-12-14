@@ -2,8 +2,9 @@
   "required": true,
   "minVersion": "0.8",
   "package": "mist475.mcpatcherforge.mixins.late",
-  "refmap": "mixins.mcpatcherforge.refmap.json",
+  "refmap": "mixins.cit.refmap.json",
   "target": "@env(DEFAULT)",
+  "plugin": "mist475.mcpatcherforge.mixins.late.MixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "client": [
     "MixinTextureMap"
