@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.early.client.resources;
+package mist475.mcpatcherforge.mixins.client;
 
 import net.minecraft.client.resources.SimpleReloadableResourceManager;
 

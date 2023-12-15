@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.early.client.renderer.texture;
+package mist475.mcpatcherforge.mixins.client.renderer.texture;
 
 import java.util.List;
 

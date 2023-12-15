@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.early.client.renderer.entity;
+package mist475.mcpatcherforge.mixins.client.renderer.entity;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;

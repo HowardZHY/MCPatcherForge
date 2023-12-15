@@ -31,7 +31,7 @@ public class MCPatcherForgeCore implements IFMLLoadingPlugin, IEarlyMixinLoader 
 
     @Override
     public String getMixinConfig() {
-        return "mixins.cit.early.json";
+        return "mixins.cit.client.json";
     }
 
     public List<String> getMixins(Set<String> loadedCoreMods) {

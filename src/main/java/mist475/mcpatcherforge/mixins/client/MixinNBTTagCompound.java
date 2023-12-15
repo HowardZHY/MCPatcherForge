@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.early.nbt;
+package mist475.mcpatcherforge.mixins.client;
 
 import java.util.Collection;
 import java.util.Map;

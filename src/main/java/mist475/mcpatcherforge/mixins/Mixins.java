@@ -13,36 +13,24 @@ public enum Mixins {
         .setApplyIf(() -> true)
         .addTargetedMod(TargetedMod.VANILLA)
         .addMixinClasses(
-            "client.renderer.entity.MixinRenderBiped",
-            "client.renderer.entity.MixinRenderEntityLiving",
-            "client.renderer.entity.MixinRenderItem",
-            "client.renderer.entity.MixinRenderLiving",
-            "client.renderer.entity.MixinRenderPlayer",
-            "client.renderer.entity.MixinRenderSnowball",
+            "renderer.MixinItemRenderer",
+            "renderer.entity.MixinRenderBiped",
+            "renderer.entity.MixinRenderEntityLiving",
+            "renderer.entity.MixinRenderItem",
+            "renderer.entity.MixinRenderLiving",
+            "renderer.entity.MixinRenderPlayer",
+            "renderer.entity.MixinRenderSnowball",
 
-            "client.renderer.texture.MixinAbstractTexture",
-            "client.renderer.texture.MixinTextureAtlasSprite",
-            "client.renderer.texture.MixinTextureMap",
+            "renderer.texture.MixinAbstractTexture",
+            "renderer.texture.MixinTextureAtlasSprite",
+            "renderer.texture.MixinTextureMap",
 
-            "client.renderer.MixinItemRenderer",
-
-            "client.resources.MixinSimpleReloadableResourceManager",
-
-            "client.MixinMinecraft",
-
-            "item.MixinItem",
-
-            "nbt.MixinNBTTagCompound",
-            "nbt.MixinNBTTagList"
+            "MixinItem",
+            "MixinMinecraft",
+            "MixinNBTTagCompound",
+            "MixinNBTTagList",
+            "MixinSimpleReloadableResourceManager"
         ));
-
-    /*OPTIFINE(new Builder("All the late mixins!").setSide(Side.CLIENT)
-        .setPhase(Phase.LATE)
-        .setApplyIf(() -> true)
-        .addTargetedMod(TargetedMod.OPTIFINE)
-        .addMixinClasses(
-            "MixinTextureMap"
-        ));*/
 
     public final String name;
     public final List<String> mixinClasses;
@@ -51,22 +39,6 @@ public enum Mixins {
     private final Side side;
     public final List<TargetedMod> targetedMods;
     public final List<TargetedMod> excludedMods;
-
-    public static List<String> getLateMixins(Set<String> loadedMods) {
-        final List<String> mixins = new ArrayList<>();
-        final List<String> notLoading = new ArrayList<>();
-        for (Mixins mixin : Mixins.values()) {
-            if (mixin.phase == Phase.LATE) {
-                if (mixin.shouldLoad(Collections.emptySet(), loadedMods)) {
-                    mixins.addAll(mixin.mixinClasses);
-                } else {
-                    notLoading.addAll(mixin.mixinClasses);
-                }
-            }
-        }
-        System.out.print("Not loading the following LATE mixins: "+ notLoading.toString());
-        return mixins;
-    }
 
     private static class Builder {
 

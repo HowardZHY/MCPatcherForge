@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.early.client.renderer;
+package mist475.mcpatcherforge.mixins.client.renderer;
 
 import com.prupe.mcpatcher.cit.CITUtils;
 import net.minecraft.client.renderer.ItemRenderer;

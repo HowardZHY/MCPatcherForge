@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.early.client;
+package mist475.mcpatcherforge.mixins.client;
 
 import com.google.common.collect.Multimap;
 import com.prupe.mcpatcher.MCPatcherUtils;

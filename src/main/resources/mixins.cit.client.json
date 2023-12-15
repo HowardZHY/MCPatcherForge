@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "mist475.mcpatcherforge.mixins.early",
+  "package": "mist475.mcpatcherforge.mixins.client",
   "refmap": "mixins.cit.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8"

@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.early.item;
+package mist475.mcpatcherforge.mixins.client;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
