@@ -25,7 +25,6 @@ public class MCPatcherUtils {
     private static File minecraftDir;
     private static File gameDir;
 
-    public static final String CUSTOM_COLORS = "Custom Colors";
     public static final String CONNECTED_TEXTURES = "Connected Textures";
     public static final String CUSTOM_ITEM_TEXTURES = "Custom Item Textures";
 
@@ -96,7 +95,7 @@ public class MCPatcherUtils {
             if (!value.isEmpty()) {
                 try {
                     return Integer.parseInt(value);
-                } catch (NumberFormatException e) {}
+                } catch (NumberFormatException ignored) {}
             }
         }
         return defaultValue;
@@ -117,7 +116,7 @@ public class MCPatcherUtils {
             if (!value.isEmpty()) {
                 try {
                     return Integer.parseInt(value, 16);
-                } catch (NumberFormatException e) {}
+                } catch (NumberFormatException ignored) {}
             }
         }
         return defaultValue;
@@ -158,7 +157,7 @@ public class MCPatcherUtils {
             if (!value.isEmpty()) {
                 try {
                     return Float.parseFloat(value);
-                } catch (NumberFormatException e) {}
+                } catch (NumberFormatException ignored) {}
             }
         }
         return defaultValue;
@@ -179,7 +178,7 @@ public class MCPatcherUtils {
             if (!value.isEmpty()) {
                 try {
                     return Double.parseDouble(value);
-                } catch (NumberFormatException e) {}
+                } catch (NumberFormatException ignored) {}
             }
         }
         return defaultValue;
@@ -303,7 +302,7 @@ public class MCPatcherUtils {
                         }
                     }
                 }
-            } catch (NumberFormatException e) {}
+            } catch (NumberFormatException ignored) {}
         }
         if (minValue <= maxValue) {
             for (int i = 0; i < tmpList.size();) {

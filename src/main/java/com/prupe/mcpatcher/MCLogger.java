@@ -42,7 +42,7 @@ public class MCLogger {
     private MCLogger(String category, String logPrefix) {
         this.logPrefix = logPrefix;
         logger = Logger.getLogger(category);
-        logger.setLevel(Config.getLogLevel(category));
+        logger.setLevel(MCPatcherConfig.getLogLevel(category));
         logger.setUseParentHandlers(false);
         logger.addHandler(new Handler() {
 

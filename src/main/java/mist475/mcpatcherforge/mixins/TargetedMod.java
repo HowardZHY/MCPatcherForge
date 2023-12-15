@@ -3,9 +3,7 @@ package mist475.mcpatcherforge.mixins;
 // Adapted from hodgepodge
 public enum TargetedMod {
 
-    VANILLA("Minecraft", null),
-
-    OPTIFINE("Optifine", "optifine.OptiFineForgeTweaker", "Optifine");
+    VANILLA("Minecraft", null);
 
     /** The "name" in the @Mod annotation */
     public final String modName;

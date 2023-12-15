@@ -18,7 +18,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
-import com.prupe.mcpatcher.Config;
+import com.prupe.mcpatcher.MCPatcherConfig;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.item.ItemAPI;
@@ -46,10 +46,10 @@ public class CITUtils {
     static Item itemCompass;
     static Item itemClock;
 
-    static final boolean enableItems = Config.getBoolean(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "items", true);
-    static final boolean enableEnchantments = Config
+    static final boolean enableItems = MCPatcherConfig.getBoolean(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "items", true);
+    static final boolean enableEnchantments = MCPatcherConfig
         .getBoolean(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "enchantments", true);
-    static final boolean enableArmor = Config.getBoolean(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "armor", true);
+    static final boolean enableArmor = MCPatcherConfig.getBoolean(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, "armor", true);
 
     private static TileLoader tileLoader;
     private static final Map<Item, List<ItemOverride>> items = new IdentityHashMap<>();

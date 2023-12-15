@@ -17,7 +17,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
-import com.prupe.mcpatcher.Config;
+import com.prupe.mcpatcher.MCPatcherConfig;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.mal.resource.BlendMethod;
@@ -30,7 +30,7 @@ public class TileLoader {
 
     private static final List<TileLoader> loaders = new ArrayList<>();
 
-    private static final boolean debugTextures = Config
+    private static final boolean debugTextures = MCPatcherConfig
         .getBoolean(MCPatcherUtils.CONNECTED_TEXTURES, "debugTextures", false);
     private static final Map<String, String> specialTextures = new HashMap<>();
 

@@ -15,9 +15,9 @@ import net.minecraft.launchwrapper.Launch;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class Config {
+public class MCPatcherConfig {
 
-    private static Config instance;
+    private static MCPatcherConfig instance;
 
     private static final File configFile = new File(Launch.minecraftHome, "config" + File.separator + "mcpatcher.json");
 
@@ -25,7 +25,7 @@ public class Config {
 
     Map<String, Map<String, String>> profile;
 
-    public static Config getInstance() {
+    public static MCPatcherConfig getInstance() {
         if (instance == null) {
             loadConfig();
         }
@@ -56,11 +56,11 @@ public class Config {
     static void loadConfig() {
         Gson gson = new Gson();
         try (Reader reader = Files.newBufferedReader(configFile.toPath())) {
-            instance = gson.fromJson(reader, Config.class);
+            instance = gson.fromJson(reader, MCPatcherConfig.class);
         } catch (IOException e) {
             Logger.getLogger("mcpatcher")
                 .warning("Failed to read mcpatcher json config file, using defaults");
-            instance = new Config();
+            instance = new MCPatcherConfig();
             if (instance.logging == null) {
                 instance.logging = new LinkedHashMap<>();
             }
