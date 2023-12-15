@@ -81,7 +81,7 @@ public abstract class MixinRenderEntityLiving extends Render {
      * @author Mist475 (adapted from Paul Rupe)
      * @reason if statement modified into else-if
      */
-    @SuppressWarnings("DuplicatedCode")
+    @SuppressWarnings("all")
     @Overwrite
     public void doRender(EntityLivingBase entity, double x, double y, double z, float p_76986_8_, float p_76986_9_) {
         if (MinecraftForge.EVENT_BUS
@@ -111,10 +111,11 @@ public abstract class MixinRenderEntityLiving extends Render {
             float f3 = this.interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, p_76986_9_);
             float f4;
 
-            if (entity.isRiding() && entity.ridingEntity instanceof EntityLivingBase entitylivingbase1) {
+            if (entity.isRiding() && entity.ridingEntity instanceof EntityLivingBase) {
+                EntityLivingBase elb = (EntityLivingBase) entity;
                 f2 = this.interpolateRotation(
-                    entitylivingbase1.prevRenderYawOffset,
-                    entitylivingbase1.renderYawOffset,
+                    elb.prevRenderYawOffset,
+                    elb.renderYawOffset,
                     p_76986_9_);
                 f4 = MathHelper.wrapAngleTo180_float(f3 - f2);
 

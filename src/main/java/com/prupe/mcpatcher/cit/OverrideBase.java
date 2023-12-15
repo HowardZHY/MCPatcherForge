@@ -55,29 +55,29 @@ abstract class OverrideBase implements Comparable<OverrideBase> {
         String type = properties.getString("type", "item")
             .toLowerCase();
         OverrideBase override;
-        switch (type) {
-            case "item" -> {
+        switch (type) { // By Bing GPT
+            case "item":
                 if (!CITUtils.enableItems) {
                     return null;
                 }
                 override = new ItemOverride(properties);
-            }
-            case "enchantment", "overlay" -> {
+                break;
+            case "enchantment":
+            case "overlay":
                 if (!CITUtils.enableEnchantments) {
                     return null;
                 }
                 override = new Enchantment(properties);
-            }
-            case "armor" -> {
+                break;
+            case "armor":
                 if (!CITUtils.enableArmor) {
                     return null;
                 }
                 override = new ArmorOverride(properties);
-            }
-            default -> {
+                break;
+            default:
                 logger.error("%s: unknown type '%s'", filename, type);
                 return null;
-            }
         }
         return override.properties.valid() ? override : null;
     }

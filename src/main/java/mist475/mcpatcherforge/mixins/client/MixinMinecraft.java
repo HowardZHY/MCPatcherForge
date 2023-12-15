@@ -6,8 +6,6 @@ import com.prupe.mcpatcher.cit.CITUtils;
 import com.prupe.mcpatcher.mal.resource.TexturePackChangeHandler;
 import com.prupe.mcpatcher.mal.tile.TileLoader;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
@@ -16,12 +14,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import javax.imageio.ImageIO;
 import java.io.File;
-import java.io.IOException;
 import java.net.Proxy;
 
 @Mixin(Minecraft.class)
@@ -74,22 +69,6 @@ public abstract class MixinMinecraft {
             shift = At.Shift.AFTER))
     private void modifyStartGame3(CallbackInfo ci) {
         TexturePackChangeHandler.afterChange1();
-    }
-
-    @Redirect(
-        method = "loadScreen()V",
-        at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/texture/TextureManager;getDynamicTextureLocation(Ljava/lang/String;Lnet/minecraft/client/renderer/texture/DynamicTexture;)Lnet/minecraft/util/ResourceLocation;"))
-    private ResourceLocation modifyLoadScreen(TextureManager renderEngine, String p_110578_1_,
-        DynamicTexture p_110578_2_) throws IOException {
-        return renderEngine.getDynamicTextureLocation(
-            "logo",
-            new DynamicTexture(
-                ImageIO.read(
-                    this.getResourceManager()
-                        .getResource(locationMojangPng)
-                        .getInputStream())));
     }
 
     @Inject(method = "runGameLoop()V", at = @At(value = "HEAD"))

@@ -33,6 +33,7 @@ import com.prupe.mcpatcher.MCPatcherUtils;
 
 import mist475.mcpatcherforge.interfaces.AbstractTextureExpansion;
 
+@SuppressWarnings("all")
 public class TexturePackAPI {
 
     private static final MCLogger logger = MCLogger.getLogger("Texture Pack");
@@ -67,7 +68,8 @@ public class TexturePackAPI {
         Set<String> namespaces = new HashSet<>();
         namespaces.add(DEFAULT_NAMESPACE);
         IResourceManager resourceManager = getResourceManager();
-        if (resourceManager instanceof SimpleReloadableResourceManager simpleReloadableResourceManager) {
+        if (resourceManager instanceof SimpleReloadableResourceManager) {
+            SimpleReloadableResourceManager simpleReloadableResourceManager = (SimpleReloadableResourceManager) resourceManager;
             namespaces.addAll(simpleReloadableResourceManager.domainResourceManagers.keySet());
         }
         return namespaces;
@@ -79,7 +81,8 @@ public class TexturePackAPI {
 
     public static InputStream getInputStream(ResourceLocation resource) {
         try {
-            if (resource instanceof ResourceLocationWithSource resourceLocationWithSource) {
+            if (resource instanceof ResourceLocationWithSource) {
+                ResourceLocationWithSource resourceLocationWithSource = (ResourceLocationWithSource) resource;
                 try {
                     return resourceLocationWithSource.getSource()
                         .getInputStream(resource);

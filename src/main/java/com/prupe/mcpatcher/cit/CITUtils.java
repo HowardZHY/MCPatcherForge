@@ -197,7 +197,8 @@ public class CITUtils {
     }
 
     public static IIcon getEntityIcon(IIcon icon, Entity entity) {
-        if (entity instanceof EntityPotion potion) {
+        if (entity instanceof EntityPotion) {
+            EntityPotion potion = (EntityPotion) entity;
             return getIcon(icon, potion.potionDamage, 1);
         }
         return icon;
@@ -344,7 +345,8 @@ public class CITUtils {
             } else {
                 base = nbt.getTag("ench");
             }
-            if (base instanceof NBTTagList list) {
+            if (base instanceof NBTTagList) {
+                NBTTagList list = (NBTTagList) base;
                 for (int i = 0; i < list.tagCount(); i++) {
                     base = ((NBTTagListExpansion) list).tagAt(i);
                     if (base instanceof NBTTagCompound) {
