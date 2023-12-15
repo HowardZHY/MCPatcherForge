@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.late;
+package mist475.mcpatcherforge.mixins.optifine;
 
 import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 import java.util.List;
 import java.util.Set;
 
-public class MixinPlugin implements IMixinConfigPlugin {
+public class CITOptiFineMixinPlugin implements IMixinConfigPlugin {
     @Override
     public void onLoad(String mixinPackage) {
     }

@@ -1,10 +1,10 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "mist475.mcpatcherforge.mixins.late",
+  "package": "mist475.mcpatcherforge.mixins.optifine",
   "refmap": "mixins.cit.refmap.json",
   "target": "@env(DEFAULT)",
-  "plugin": "mist475.mcpatcherforge.mixins.late.MixinPlugin",
+  "plugin": "mist475.mcpatcherforge.mixins.optifine.CITOptiFineMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "client": [
     "MixinTextureMap"

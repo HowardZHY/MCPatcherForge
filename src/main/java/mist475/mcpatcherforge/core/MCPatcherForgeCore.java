@@ -26,7 +26,7 @@ public class MCPatcherForgeCore implements IFMLLoadingPlugin, IEarlyMixinLoader 
     public MCPatcherForgeCore() {
         MixinBootstrap.init();
         MixinEnvironment.getDefaultEnvironment().setSide(MixinEnvironment.Side.CLIENT);
-        org.spongepowered.asm.mixin.Mixins.addConfiguration("mixins.cit.late.json");
+        org.spongepowered.asm.mixin.Mixins.addConfiguration("mixins.cit.optifine.json");
     }
 
     @Override

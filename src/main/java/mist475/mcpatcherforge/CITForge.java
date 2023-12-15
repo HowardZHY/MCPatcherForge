@@ -9,5 +9,5 @@ import cpw.mods.fml.common.Mod;
     acceptedMinecraftVersions = "*",
     acceptableRemoteVersions = "*"
 )
-public class McPatcherForge {
+public class CITForge {
 }

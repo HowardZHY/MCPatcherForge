@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.late;
+package mist475.mcpatcherforge.mixins.optifine;
 
 import net.minecraft.client.renderer.texture.TextureMap;
 import org.spongepowered.asm.mixin.Mixin;
