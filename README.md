@@ -12,7 +12,9 @@ If you find issues feel free to report, but it might take a while before mist475
 
 ## Known issues:
 
-Incompatibility with https://github.com/quentin452/Multithreadingandtweaks, it @Overwrites methods used by this mod.
+Incompatibility with https://github.com/quentin452/OptimizationsAndTweaks, it @Overwrites methods used by this mod.
+
+You have to set B:enableMixinRenderItem=false and B:enableMixinItemRenderer=false if you have to use it.
 
 Items with golden in its name like golden_horse_armor or golden_hoe didn't show with default name, you have to use the format below:
 

@@ -1,5 +1,6 @@
 package mist475.mcpatcherforge.mixins.optifine;
 
+import com.llamalad7.mixinextras.injector.WrapWithCondition;
 import com.prupe.mcpatcher.cit.CITUtils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -7,9 +8,7 @@ import net.minecraft.util.IIcon;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @SuppressWarnings("all")
 @Pseudo
@@ -27,12 +26,11 @@ public class MixinItemRendererOF {
         return CITUtils.getIcon(entity.getItemIcon(item2, renderPass1), item2, renderPass1);
     }
 
-    @Inject(
-        method = "renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;I)V",
-        at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/GL11;glDepthFunc(I)V"))
-    private void modifyRenderItemGlint(EntityLivingBase entity, ItemStack item,  int renderPass, CallbackInfo ci) {
-        if (!CITUtils.renderEnchantmentHeld(item, renderPass) && item.hasEffect(renderPass)) {
-
-        }
+    @Redirect(
+        method = "renderItem(Lnet/minecraft/entity/EntityLivingBase;Lnet/minecraft/item/ItemStack;ILnet/minecraftforge/client/IItemRenderer$ItemRenderType;)V",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;hasEffect()Z"),
+        remap = false)
+    private boolean modifyRenderItemGlint(ItemStack item, EntityLivingBase entity, ItemStack itemStack, int renderPass) {
+        return !CITUtils.renderEnchantmentHeld(item, renderPass) && item.hasEffect(renderPass);
     }
 }
