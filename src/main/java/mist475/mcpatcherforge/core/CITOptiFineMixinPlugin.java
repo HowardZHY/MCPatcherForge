@@ -1,4 +1,4 @@
-package mist475.mcpatcherforge.mixins.optifine;
+package mist475.mcpatcherforge.core;
 
 import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;

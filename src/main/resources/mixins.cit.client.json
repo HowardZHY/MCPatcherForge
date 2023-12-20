@@ -1,10 +1,27 @@
 {
   "required": true,
-  "minVersion": "0.8",
+  "minVersion": "0.7",
   "package": "mist475.mcpatcherforge.mixins.client",
   "refmap": "mixins.cit.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
   "client": [
+    "renderer.MixinItemRenderer",
+    "renderer.entity.MixinRenderBiped",
+    "renderer.entity.MixinRenderEntityLiving",
+    "renderer.entity.MixinRenderItem",
+    "renderer.entity.MixinRenderLiving",
+    "renderer.entity.MixinRenderPlayer",
+    "renderer.entity.MixinRenderSnowball",
+
+    "renderer.texture.MixinAbstractTexture",
+    "renderer.texture.MixinTextureAtlasSprite",
+    "renderer.texture.MixinTextureMap",
+
+    "MixinItem",
+    "MixinMinecraft",
+    "MixinNBTTagCompound",
+    "MixinNBTTagList",
+    "MixinSimpleReloadableResourceManager"
   ]
 }

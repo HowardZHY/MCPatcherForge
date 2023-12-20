@@ -757,7 +757,7 @@ if (usesShadowedDependencies.toBoolean()) {
     javaComponent.withVariantsFromConfiguration(configurations.shadowRuntimeElements) {
         skip()
     }
-    for (runTask in ["runClient", "runServer", "runClient17", "runServer17"]) {
+    for (runTask in ["runClient", "runServer"]) {
         tasks.named(runTask).configure {
             dependsOn("shadowJar")
         }

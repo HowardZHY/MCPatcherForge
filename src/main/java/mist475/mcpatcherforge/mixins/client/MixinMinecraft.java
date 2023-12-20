@@ -6,12 +6,8 @@ import com.prupe.mcpatcher.cit.CITUtils;
 import com.prupe.mcpatcher.mal.resource.TexturePackChangeHandler;
 import com.prupe.mcpatcher.mal.tile.TileLoader;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -19,15 +15,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.io.File;
 import java.net.Proxy;
 
+@SuppressWarnings("all")
 @Mixin(Minecraft.class)
-public abstract class MixinMinecraft {
-
-    @Shadow
-    public abstract IResourceManager getResourceManager();
-
-    @Shadow
-    @Final
-    private static ResourceLocation locationMojangPng;
+public abstract class MixinMinecraft{
 
     @Inject(
         method = "<init>(Lnet/minecraft/util/Session;IIZZLjava/io/File;Ljava/io/File;Ljava/io/File;Ljava/net/Proxy;Ljava/lang/String;Lcom/google/common/collect/Multimap;Ljava/lang/String;)V",
