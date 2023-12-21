@@ -17,7 +17,7 @@ public abstract class MixinRenderSnowball {
     @Redirect(
         method = "doRender(Lnet/minecraft/entity/Entity;DDDFF)V",
         at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;getIconFromDamage(I)Lnet/minecraft/util/IIcon;"))
-    private IIcon modifyDoRender(Item item, int damage, Entity entity) {
+    private IIcon modifyDoRender(Item item, int damage, Entity entity, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_) {
         return CITUtils.getEntityIcon(item.getIconFromDamage(damage), entity);
     }
 }

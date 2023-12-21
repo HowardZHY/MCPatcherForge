@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("all")
-@IFMLLoadingPlugin.TransformerExclusions("mist475.mcpatcherforge.core")
-@IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE + 5)
+//@IFMLLoadingPlugin.TransformerExclusions("mist475.mcpatcherforge.core")
+//@IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE + 5)
 public class CITForgeCore implements IFMLLoadingPlugin {
 
     public static final Logger log = LogManager.getLogger("MCPatcher");
@@ -76,6 +76,6 @@ public class CITForgeCore implements IFMLLoadingPlugin {
 
     @Override
     public String getAccessTransformerClass() {
-        return null;
+        return "mist475.mcpatcherforge.core.CITAccessTransformer";
     }
 }

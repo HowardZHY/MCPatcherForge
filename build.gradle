@@ -300,7 +300,7 @@ try {
     }
 }
 catch (Exception ignored) {
-    versionOverride = 'preview-1.7.10'
+    versionOverride = 'preview-1.7.2'
     identifiedVersion = versionOverride
 }
 version = identifiedVersion
@@ -650,7 +650,7 @@ tasks.named("processResources", ProcessResources).configure {
     // replace stuff in mcmod.info, nothing else. replaces ${key} with value in text
     filesMatching("mcmod.info")  {
         expand "minecraftVersion": project.minecraft.mcVersion,
-            "modVersion": "preview-1.7.10",
+            "modVersion": "preview-1.7.2",
             "modId": modId,
             "modName": modName
     }

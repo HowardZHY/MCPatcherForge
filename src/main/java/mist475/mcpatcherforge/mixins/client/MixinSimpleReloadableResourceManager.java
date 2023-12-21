@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.prupe.mcpatcher.mal.resource.TexturePackChangeHandler;
 
+@SuppressWarnings("all")
 @Mixin(SimpleReloadableResourceManager.class)
 public abstract class MixinSimpleReloadableResourceManager {
 

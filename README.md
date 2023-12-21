@@ -1,4 +1,4 @@
-# MCPatcher's Custom Item Texture (CIT) as a 1.7.10 Forge mod using Mixins.
+# MCPatcher's Custom Item Texture (CIT) as a 1.7.2 Forge mod using Mixins.
 
 Based on mist475's MCPatcher Forge port: https://github.com/mist475/MCPatcherForge. If you don't use OptiFine you can try that.
 
@@ -8,13 +8,17 @@ Based on mist475's MCPatcher Forge port: https://github.com/mist475/MCPatcherFor
 
 Original source code is under MIT, changes by mist475 are lgpl 3.0
 
-If you find issues feel free to report, but it might take a while before mist475 get around to it.
+This branch cannot runClient, only for build
 
-## Known issues:
+# IMPORTANT
 
-Incompatibility with https://github.com/quentin452/OptimizationsAndTweaks, it @Overwrites methods used by this mod.
+## You MUST edit your version.json like 1.7.2-Forge_10.12.2.1161.json and replace
+```"name": "org.ow2.asm:asm-all:4.1"```
+## to
+```"name": "org.ow2.asm:asm-all:5.0.3"```
+## in it to make the game launch !
 
-You have to set B:enableMixinRenderItem=false and B:enableMixinItemRenderer=false if you have to use it.
+### Known issues:
 
 Items with golden in its name like golden_horse_armor or golden_hoe didn't show with default name, you have to use the format below:
 
@@ -24,4 +28,3 @@ texture=golden_hoe
 ```
 
 In the item's properties to make it working.
-

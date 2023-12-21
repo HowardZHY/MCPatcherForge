@@ -23,6 +23,7 @@ import net.minecraft.util.ResourceLocation;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 
+@SuppressWarnings("all")
 public class ResourceList {
 
     private static final MCLogger logger = MCLogger.getLogger("Texture Pack");
@@ -110,7 +111,7 @@ public class ResourceList {
                 MCPatcherUtils.close(zipFile);
             }
         }
-        Map<String, File> map = resourcePack.field_152781_b; // map
+        Map<String, File> map = resourcePack.field_110606_b;
         if (map != null) {
             for (Map.Entry<String, File> entry : map.entrySet()) {
                 String key = entry.getKey();

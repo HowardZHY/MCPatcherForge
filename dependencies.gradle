@@ -38,11 +38,13 @@ dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.4.13-GTNH:dev")
     //runtimeOnlyNonPublishable("com.github.GTNewHorizons:inventory-tweaks:1.6.0:dev")
     //runtimeOnlyNonPublishable deobf('https://github.com/Yoghurt4C/Audino/releases/download/1.0.1/Audino-1.0.1.jar')
-    /*shadeCompile("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
+    shadeCompile("org.spongepowered:mixin:0.7.11-SNAPSHOT") {
         exclude module: 'launchwrapper'
         exclude module: 'guava'
         exclude module: 'gson'
         exclude module: 'commons-io'
         exclude module: 'log4j-core'
-    }*/
+        exclude module: 'LICENSE.txt'
+    }
+    compileOnly fileTree(dir: 'libs', include:'shadow.jar')
 }

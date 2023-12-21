@@ -20,11 +20,9 @@ import java.net.Proxy;
 public abstract class MixinMinecraft{
 
     @Inject(
-        method = "<init>(Lnet/minecraft/util/Session;IIZZLjava/io/File;Ljava/io/File;Ljava/io/File;Ljava/net/Proxy;Ljava/lang/String;Lcom/google/common/collect/Multimap;Ljava/lang/String;)V",
+        method = "<init>(Lnet/minecraft/util/Session;IIZZLjava/io/File;Ljava/io/File;Ljava/io/File;Ljava/net/Proxy;Ljava/lang/String;)V",
         at = @At("RETURN"))
-    private void modifyConstructor(Session sessionIn, int displayWidth, int displayHeight, boolean fullscreen,
-        boolean isDemo, File dataDir, File assetsDir, File resourcePackDir, Proxy proxy, String version,
-        Multimap<String, String> twitchDetails, String assetsJsonVersion, CallbackInfo ci) {
+    private void modifyConstructor(Session sessionIn, int displayWidth, int displayHeight, boolean fullscreen, boolean isDemo, File dataDir, File assetsDir, File resourcePackDir, Proxy proxy, String version, CallbackInfo ci) {
         MCPatcherUtils.setMinecraft(dataDir);
     }
 

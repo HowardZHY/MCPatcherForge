@@ -30,7 +30,7 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity {
             target = "Lnet/minecraft/client/renderer/entity/RenderBiped;getArmorResource(Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;ILjava/lang/String;)Lnet/minecraft/util/ResourceLocation;",
             remap = false))
     private ResourceLocation modifyShouldRenderPass(Entity entity, ItemStack stack, int slot, String type,
-        AbstractClientPlayer player) {
+        AbstractClientPlayer player, int i, float f) {
         return CITUtils
             .getArmorTexture(RenderBiped.getArmorResource(player, stack, slot, type), (EntityLivingBase) entity, stack);
     }
@@ -42,7 +42,7 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity {
             target = "Lnet/minecraft/client/renderer/entity/RenderBiped;getArmorResource(Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;ILjava/lang/String;)Lnet/minecraft/util/ResourceLocation;",
             remap = false))
     private ResourceLocation modifyFunc_82408_c(Entity entity, ItemStack stack, int slot, String type,
-        AbstractClientPlayer player) {
+        AbstractClientPlayer player, int i, float f) {
         return CITUtils
             .getArmorTexture(RenderBiped.getArmorResource(player, stack, slot, type), (EntityLivingBase) entity, stack);
     }
