@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 
+@SuppressWarnings("unused")
 final public class PropertiesFile {
 
     private final MCLogger logger;
@@ -104,6 +105,7 @@ final public class PropertiesFile {
         logger.warning(prefix + format, params);
     }
 
+    @SuppressWarnings("all")
     public boolean error(String format, Object... params) {
         logger.error(prefix + format, params);
         errorCount++;
@@ -120,7 +122,7 @@ final public class PropertiesFile {
 
     @SuppressWarnings("unchecked")
     public Set<Map.Entry<String, String>> entrySet() {
-        return (Set<Map.Entry<String, String>>) (Set) properties.entrySet();
+        return (Set<Map.Entry<String, String>>) (Set<?>) properties.entrySet();
     }
 
     public ResourceLocation getResource() {

@@ -5,7 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @SuppressWarnings("all")
 @Pseudo
-@Mixin(targets = {"ItemRendererOF", "net.minecraft.src.ItemRendererOF", "net.optifine.ItemRendererOF"}, remap = false)
+@Mixin(targets = {"ItemRendererOF", "net.minecraft.src.ItemRendererOF"}, remap = false)
 public class MixinItemRendererOF extends ItemRenderer {
 
     public MixinItemRendererOF(Minecraft p_i1247_1_) {
@@ -21,13 +21,13 @@ public class MixinItemRendererOF extends ItemRenderer {
     }
 
     @Redirect(
-        method = "func_78443_a", //func_78443_a
+        method = "func_78443_a",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/EntityLivingBase;func_70620_b(Lnet/minecraft/item/ItemStack;I)Lnet/minecraft/util/IIcon;"
+            target = "Lnet/minecraft/entity/EntityLivingBase;func_70620_b(Lnet/minecraft/item/ItemStack;I)Lnet/minecraft/util/Icon;"
         )
     )
-    private IIcon modifyRenderItem(EntityLivingBase elb, ItemStack item, int renderPass, EntityLivingBase entity, ItemStack item2, int renderPass1) {
+    private Icon modifyRenderItem(EntityLivingBase elb, ItemStack item, int renderPass, EntityLivingBase entity, ItemStack item2, int renderPass1) {
         return CITUtils.getIcon(entity.getItemIcon(item2, renderPass1), item2, renderPass1);
     }
 

@@ -20,7 +20,7 @@ public abstract class MixinRenderBiped extends RenderLiving {
     }
 
     @Redirect(
-        method = "shouldRenderPass(Lnet/minecraft/entity/EntityLiving;IF)I",
+        method = "func_130006_a(Lnet/minecraft/entity/EntityLiving;IF)I",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/entity/RenderBiped;bindTexture(Lnet/minecraft/util/ResourceLocation;)V"))
@@ -31,11 +31,10 @@ public abstract class MixinRenderBiped extends RenderLiving {
     }
 
     @Redirect(
-        method = "func_82408_c(Lnet/minecraft/entity/EntityLiving;IF)V",
+        method = "func_130013_c(Lnet/minecraft/entity/EntityLiving;IF)V",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/entity/RenderBiped;bindTexture(Lnet/minecraft/util/ResourceLocation;)V"))
-
     private void modifyFunc_82408_c(RenderBiped instance, ResourceLocation resourceLocation, EntityLiving entityLiving,
         int slotId, float p_82408_3_) {
         this.bindTexture(

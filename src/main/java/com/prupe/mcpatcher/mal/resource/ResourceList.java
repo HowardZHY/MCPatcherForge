@@ -1,7 +1,6 @@
 package com.prupe.mcpatcher.mal.resource;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -17,30 +16,29 @@ import java.util.zip.ZipFile;
 import net.minecraft.client.resources.AbstractResourcePack;
 import net.minecraft.client.resources.DefaultResourcePack;
 import net.minecraft.client.resources.FileResourcePack;
-import net.minecraft.client.resources.IResourcePack;
+import net.minecraft.client.resources.ResourcePack;
 import net.minecraft.util.ResourceLocation;
 
 import com.prupe.mcpatcher.MCLogger;
 import com.prupe.mcpatcher.MCPatcherUtils;
 
-@SuppressWarnings("all")
 public class ResourceList {
 
     private static final MCLogger logger = MCLogger.getLogger("Texture Pack");
 
     private static ResourceList instance;
-    private static final Map<IResourcePack, Integer> resourcePackOrder = new WeakHashMap<>();
+    private static final Map<ResourcePack, Integer> resourcePackOrder = new WeakHashMap<>();
 
-    private final IResourcePack resourcePack;
+    private final ResourcePack resourcePack;
     private final Set<ResourceLocationWithSource> allResources = new TreeSet<>(
         new ResourceLocationWithSource.Comparator1());
 
     public static ResourceList getInstance() {
         if (instance == null) {
-            List<IResourcePack> resourcePacks = TexturePackAPI.getResourcePacks(null);
+            List<ResourcePack> resourcePacks = TexturePackAPI.getResourcePacks(null);
             int order = resourcePacks.size();
             resourcePackOrder.clear();
-            for (IResourcePack resourcePack : resourcePacks) {
+            for (ResourcePack resourcePack : resourcePacks) {
                 resourcePackOrder.put(resourcePack, order);
                 order--;
             }
@@ -53,14 +51,14 @@ public class ResourceList {
         instance = null;
     }
 
-    public static int getResourcePackOrder(IResourcePack resourcePack) {
+    public static int getResourcePackOrder(ResourcePack resourcePack) {
         Integer i = resourcePackOrder.get(resourcePack);
         return i == null ? Integer.MAX_VALUE : i;
     }
 
     private ResourceList() {
         this.resourcePack = null;
-        for (IResourcePack resourcePack : TexturePackAPI.getResourcePacks(null)) {
+        for (ResourcePack resourcePack : TexturePackAPI.getResourcePacks(null)) {
             ResourceList sublist;
             if (resourcePack instanceof FileResourcePack) {
                 sublist = new ResourceList((FileResourcePack) resourcePack);
@@ -80,8 +78,7 @@ public class ResourceList {
                 logger.finest(
                     "%s -> %s",
                     resource,
-                    resource.getSource()
-                        .getPackName());
+                    resource.getSource().getPackName());
             }
         }
     }
@@ -89,16 +86,17 @@ public class ResourceList {
     private ResourceList(FileResourcePack resourcePack) {
         this.resourcePack = resourcePack;
         try {
-            scanZipFile(resourcePack.getResourcePackZipFile());
-        } catch (IOException e) {
+            scanZipFile(resourcePack.resourcePackZipFile);
+        } catch (Exception e) {
             logger.error(e.getMessage());
         }
         logger.fine("new %s", this);
     }
 
+    @SuppressWarnings("unchecked")
     private ResourceList(DefaultResourcePack resourcePack) {
         this.resourcePack = resourcePack;
-        String version = "1.7.10";
+        String version = "1.6.4";
         File jar = MCPatcherUtils.getMinecraftPath("versions", version, version + ".jar");
         if (jar.isFile()) {
             ZipFile zipFile = null;
@@ -111,7 +109,7 @@ public class ResourceList {
                 MCPatcherUtils.close(zipFile);
             }
         }
-        Map<String, File> map = resourcePack.field_110606_b;
+        Map<String, File> map = resourcePack.mapResourceFiles;
         if (map != null) {
             for (Map.Entry<String, File> entry : map.entrySet()) {
                 String key = entry.getKey();

@@ -53,6 +53,7 @@ abstract public class NBTRule {
         }
     }
 
+    @SuppressWarnings("unused")
     protected NBTRule(String tag, String value) {
         tagName = tag.split(Pattern.quote(NBT_RULE_SEPARATOR));
         tagIndex = new Integer[tagName.length];
@@ -204,44 +205,43 @@ abstract public class NBTRule {
                 if (result != null && cl.isAssignableFrom(result.getClass())) {
                     return cl.cast(result);
                 }
-            } catch (Throwable e) {}
+            } catch (Throwable ignored) {}
             return null;
         }
 
         @Override
         protected boolean match(NBTTagByte nbt) {
-            return byteValue != null && byteValue == nbt.func_150290_f();
+            return byteValue != null && byteValue == nbt.data;
         }
 
         @Override
         protected boolean match(NBTTagDouble nbt) {
-            return doubleValue != null && doubleValue == nbt.func_150286_g();
+            return doubleValue != null && doubleValue == nbt.data;
         }
 
         @Override
         protected boolean match(NBTTagFloat nbt) {
-            return floatValue != null && floatValue == nbt.func_150288_h();
+            return floatValue != null && floatValue == nbt.data;
         }
 
         @Override
         protected boolean match(NBTTagInt nbt) {
-            return integerValue != null && integerValue == nbt.func_150287_d();
+            return integerValue != null && integerValue == nbt.data;
         }
 
         @Override
         protected boolean match(NBTTagLong nbt) {
-            return longValue != null && longValue == nbt.func_150291_c();
+            return longValue != null && longValue == nbt.data;
         }
 
         @Override
         protected boolean match(NBTTagShort nbt) {
-            return shortValue != null && shortValue == nbt.func_150289_e();
+            return shortValue != null && shortValue == nbt.data;
         }
 
         @Override
         protected boolean match(NBTTagString nbt) {
-            return nbt.func_150285_a_()
-                .equals(stringValue);
+            return nbt.data.equals(stringValue);
         }
     }
 
@@ -256,12 +256,11 @@ abstract public class NBTRule {
 
         @Override
         protected boolean match(NBTTagString nbt) {
-            return pattern.matcher(nbt.func_150285_a_())
-                .matches();
+            return pattern.matcher(nbt.data).matches();
         }
     }
 
-    private static final class Glob extends NBTRule {
+    public static final class Glob extends NBTRule {
 
         private static final char STAR = '*';
         private static final char SINGLE = '?';
@@ -270,7 +269,7 @@ abstract public class NBTRule {
         private final String glob;
         private final boolean caseSensitive;
 
-        protected Glob(String tag, String value, boolean caseSensitive) {
+        public Glob(String tag, String value, boolean caseSensitive) {
             super(tag, value);
             this.caseSensitive = caseSensitive;
             if (!caseSensitive) {
@@ -281,7 +280,7 @@ abstract public class NBTRule {
 
         @Override
         protected boolean match(NBTTagString nbt) {
-            String value = nbt.func_150285_a_();
+            String value = nbt.data;
             return matchPartial(value, 0, value.length(), 0, glob.length());
         }
 

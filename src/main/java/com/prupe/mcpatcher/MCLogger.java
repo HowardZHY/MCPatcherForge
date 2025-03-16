@@ -146,7 +146,7 @@ public class MCLogger {
     }
 
     public void fine(String format, Object... params) {
-        log(Level.FINE, format, params);
+        log(Level.INFO, format, params);
     }
 
     public void finer(String format, Object... params) {

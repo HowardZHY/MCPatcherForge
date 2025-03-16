@@ -1,21 +1,15 @@
 {
-	"modListVersion": 2,
-	"modList": [{
+	"modinfoversion": 2,
+	"modlist": [{
 		"modid": "cit",
 		"name": "CustomItemTextures",
-    "description": "MCPatcher Custom Item Textures mod for Minecraft 1.7.2 Forge using Mixins.",
-		"version": "1.7.2",
-		"mcversion": "1.7.2",
+    "description": "MCPatcher Custom Item Textures mod for Minecraft 1.6 Forge using Mixins.",
+		"version": "1.6.4",
 		"url": "https://github.com/HowardZHY",
 		"updateUrl": "",
 		"authorList": ["Paul Rupe", "Mist475", "HowardZHY"],
-		"credits": "Mist475 for the Forge port: https://github.com/mist475/MCPatcherForge. UniMixins for mixins. Paul Rupe for original code: https://bitbucket.org/prupe/mcpatcher/ . ",
+		"credits": "Mist475 for the Forge port: https://github.com/mist475/MCPatcherForge. Paul Rupe for original code: https://bitbucket.org/prupe/mcpatcher/ . ",
 		"logoFile": "",
-		"screenshots": [],
-		"parent": "",
-		"requiredMods": [],
-		"dependencies": [],
-		"dependants": [],
-		"useDependencyInformation": true
+		"screenshots": []
 	}]
 }

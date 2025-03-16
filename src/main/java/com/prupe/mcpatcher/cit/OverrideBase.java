@@ -294,6 +294,7 @@ abstract class OverrideBase implements Comparable<OverrideBase> {
         return String.format("ItemOverride{%s, %s, %s}", getType(), properties, textureName);
     }
 
+    @SuppressWarnings("all")
     private static BitSet parseBitSet(PropertiesFile properties, String tag, int min, int max) {
         String value = properties.getString(tag, "");
         return parseBitSet(value, min, max);

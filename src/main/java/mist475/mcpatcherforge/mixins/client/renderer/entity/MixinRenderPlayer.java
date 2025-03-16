@@ -24,7 +24,7 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity {
     }
 
     @Redirect(
-        method = "shouldRenderPass(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)I",
+        method = "setArmorModel",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/entity/RenderBiped;getArmorResource(Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;ILjava/lang/String;)Lnet/minecraft/util/ResourceLocation;",
@@ -36,7 +36,7 @@ public abstract class MixinRenderPlayer extends RendererLivingEntity {
     }
 
     @Redirect(
-        method = "func_82408_c(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V",
+        method = "func_130220_b(Lnet/minecraft/client/entity/AbstractClientPlayer;IF)V",
         at = @At(
             value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/entity/RenderBiped;getArmorResource(Lnet/minecraft/entity/Entity;Lnet/minecraft/item/ItemStack;ILjava/lang/String;)Lnet/minecraft/util/ResourceLocation;",

@@ -5,6 +5,7 @@ import net.minecraft.util.ResourceLocation;
 
 import com.prupe.mcpatcher.mal.resource.BlendMethod;
 
+@SuppressWarnings("unused")
 public class RenderPassAPI {
 
     public static RenderPassAPI instance = new RenderPassAPI();

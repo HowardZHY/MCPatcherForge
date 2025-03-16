@@ -14,7 +14,7 @@ import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
 import com.prupe.mcpatcher.MCPatcherConfig;
@@ -46,11 +46,10 @@ public class TileLoader {
     private final Map<String, TextureAtlasSprite> baseTexturesByName = new HashMap<>();
     private final Set<ResourceLocation> tilesToRegister = new HashSet<>();
     private final Map<ResourceLocation, BufferedImage> tileImages = new HashMap<>();
-    private final Map<String, IIcon> iconMap = new HashMap<>();
+    private final Map<String, Icon> iconMap = new HashMap<>();
 
     static {
-        long maxSize = 4096L;
-        maxSize = Minecraft.getGLMaximumTextureSize();
+        long maxSize = Minecraft.getGLMaximumTextureSize();
         MAX_TILESHEET_SIZE = (maxSize * maxSize * 4) * 7 / 8;
         logger.config("max texture size is %dx%d (%.1fMB)", maxSize, maxSize, MAX_TILESHEET_SIZE / 1048576.0f);
 
@@ -138,6 +137,7 @@ public class TileLoader {
         return path;
     }
 
+    @SuppressWarnings("unused")
     public static boolean isSpecialTexture(TextureMap map, String texture, String special) {
         return special.equals(texture) || special.equals(specialTextures.get(texture));
     }
@@ -288,7 +288,7 @@ public class TileLoader {
                 return false;
             }
         }
-        IIcon icon = textureMap.registerIcon(name);
+        Icon icon = textureMap.registerIcon(name);
         map.put(name, (TextureAtlasSprite) icon);
         iconMap.put(name, icon);
         String extra = (width == height ? "" : ", " + (height / width) + " frames");
@@ -302,18 +302,18 @@ public class TileLoader {
         tileImages.clear();
     }
 
-    public IIcon getIcon(String name) {
+    public Icon getIcon(String name) {
         if (MCPatcherUtils.isNullOrEmpty(name)) {
             return null;
         }
-        IIcon icon = iconMap.get(name);
+        Icon icon = iconMap.get(name);
         if (icon == null) {
             icon = baseTexturesByName.get(name);
         }
         return icon;
     }
 
-    public IIcon getIcon(ResourceLocation resource) {
+    public Icon getIcon(ResourceLocation resource) {
         return resource == null ? null : getIcon(resource.toString());
     }
 }

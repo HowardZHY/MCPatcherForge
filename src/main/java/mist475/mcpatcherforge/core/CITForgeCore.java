@@ -2,29 +2,20 @@ package mist475.mcpatcherforge.core;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import net.minecraft.launchwrapper.Launch;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
-import sun.misc.URLClassPath;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.net.*;
+import java.util.*;
 
-@SuppressWarnings("all")
-//@IFMLLoadingPlugin.TransformerExclusions("mist475.mcpatcherforge.core")
-//@IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE + 5)
+@SuppressWarnings("unused")
+@IFMLLoadingPlugin.TransformerExclusions({"mist475.mcpatcherforge.core", "mist475.mcpatcherforge.mixins"})
+@IFMLLoadingPlugin.SortingIndex(Integer.MIN_VALUE + 2)
 public class CITForgeCore implements IFMLLoadingPlugin {
 
-    public static final Logger log = LogManager.getLogger("MCPatcher");
-
-    public CITForgeCore() {
-    }
+    public CITForgeCore() {}
 
     static {
         fixMixinClasspathOrder();
@@ -45,20 +36,25 @@ public class CITForgeCore implements IFMLLoadingPlugin {
         try {
             Field ucpField = URLClassLoader.class.getDeclaredField("ucp");
             ucpField.setAccessible(true);
-
             List<URL> urls = new ArrayList<>(Arrays.asList(classLoader.getURLs()));
             urls.remove(url);
             urls.add(0, url);
-            URLClassPath ucp = new URLClassPath(urls.toArray(new URL[0]));
-
-            ucpField.set(classLoader, ucp);
+            Class<?> ucp = Class.forName("sun.misc.URLClassPath");
+            Constructor<?> c = ucp.getDeclaredConstructor(URL[].class);
+            ucpField.set(classLoader, c.newInstance((Object) urls.toArray(new URL[0])));
         } catch (ReflectiveOperationException e) {
             throw new AssertionError(e);
         }
     }
+
+    @Override
+    public String[] getLibraryRequestClass() {
+        return new String[0];
+    }
+
     @Override
     public String[] getASMTransformerClass() {
-        return new String[0];
+        return new String[]{"mist475.mcpatcherforge.core.CITAccessTransformer"};
     }
 
     @Override
@@ -74,8 +70,4 @@ public class CITForgeCore implements IFMLLoadingPlugin {
     @Override
     public void injectData(Map<String, Object> data) {}
 
-    @Override
-    public String getAccessTransformerClass() {
-        return "mist475.mcpatcherforge.core.CITAccessTransformer";
-    }
 }

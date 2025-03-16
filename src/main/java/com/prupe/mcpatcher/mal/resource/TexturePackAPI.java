@@ -1,31 +1,15 @@
 package com.prupe.mcpatcher.mal.resource;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.AbstractTexture;
-import net.minecraft.client.renderer.texture.DynamicTexture;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.SimpleTexture;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.resources.FallbackResourceManager;
-import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.resources.IResourcePack;
-import net.minecraft.client.resources.SimpleReloadableResourceManager;
+import net.minecraft.client.renderer.texture.*;
+import net.minecraft.client.resources.*;
 import net.minecraft.util.ResourceLocation;
 
 import com.prupe.mcpatcher.MCLogger;
@@ -33,7 +17,6 @@ import com.prupe.mcpatcher.MCPatcherUtils;
 
 import mist475.mcpatcherforge.interfaces.AbstractTextureExpansion;
 
-@SuppressWarnings("all")
 public class TexturePackAPI {
 
     private static final MCLogger logger = MCLogger.getLogger("Texture Pack");
@@ -41,19 +24,21 @@ public class TexturePackAPI {
     public static final String DEFAULT_NAMESPACE = "minecraft";
 
     public static final String MCPATCHER_SUBDIR = "mcpatcher/";
+
+    @SuppressWarnings("unused")
     public static final ResourceLocation ITEMS_PNG = new ResourceLocation("textures/atlas/items.png");
 
     private static final String ASSETS = "assets/";
 
-    public static List<IResourcePack> getResourcePacks(String namespace) {
-        List<IResourcePack> resourcePacks = new ArrayList<>();
-        IResourceManager resourceManager = getResourceManager();
+    @SuppressWarnings("unchecked")
+    public static List<ResourcePack> getResourcePacks(String namespace) {
+        List<ResourcePack> resourcePacks = new ArrayList<>();
+        ResourceManager resourceManager = getResourceManager();
         if (resourceManager instanceof SimpleReloadableResourceManager) {
-            Set<Map.Entry<String, FallbackResourceManager>> entrySet = ((SimpleReloadableResourceManager) resourceManager).domainResourceManagers
-                .entrySet();
+            Set<Map.Entry<String, FallbackResourceManager>> entrySet = ((SimpleReloadableResourceManager) resourceManager).domainResourceManagers.entrySet();
             for (Map.Entry<String, FallbackResourceManager> entry : entrySet) {
                 if (namespace == null || namespace.equals(entry.getKey())) {
-                    List<IResourcePack> packs = entry.getValue().resourcePacks;
+                    List<ResourcePack> packs = entry.getValue().resourcePacks;
                     if (packs != null) {
                         resourcePacks.removeAll(packs);
                         resourcePacks.addAll(packs);
@@ -64,10 +49,11 @@ public class TexturePackAPI {
         return resourcePacks;
     }
 
+    @SuppressWarnings("unchecked")
     public static Set<String> getNamespaces() {
         Set<String> namespaces = new HashSet<>();
         namespaces.add(DEFAULT_NAMESPACE);
-        IResourceManager resourceManager = getResourceManager();
+        ResourceManager resourceManager = getResourceManager();
         if (resourceManager instanceof SimpleReloadableResourceManager) {
             SimpleReloadableResourceManager simpleReloadableResourceManager = (SimpleReloadableResourceManager) resourceManager;
             namespaces.addAll(simpleReloadableResourceManager.domainResourceManagers.keySet());
@@ -75,6 +61,7 @@ public class TexturePackAPI {
         return namespaces;
     }
 
+    @SuppressWarnings("unused")
     public static boolean isDefaultTexturePack() {
         return getResourcePacks(DEFAULT_NAMESPACE).size() <= 1;
     }
@@ -84,16 +71,15 @@ public class TexturePackAPI {
             if (resource instanceof ResourceLocationWithSource) {
                 ResourceLocationWithSource resourceLocationWithSource = (ResourceLocationWithSource) resource;
                 try {
-                    return resourceLocationWithSource.getSource()
-                        .getInputStream(resource);
-                } catch (IOException e) {}
+                    return resourceLocationWithSource.getSource().getInputStream(resource);
+                } catch (Exception e) {
+                    logger.error(e.getMessage());
+                }
             }
             return resource == null ? null
-                : Minecraft.getMinecraft()
-                    .getResourceManager()
-                    .getResource(resource)
-                    .getInputStream();
-        } catch (IOException e) {
+                : Minecraft.getMinecraft().getResourceManager().getResource(resource).getInputStream();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
             return null;
         }
     }
@@ -101,19 +87,18 @@ public class TexturePackAPI {
     public static boolean hasResource(ResourceLocation resource) {
         if (resource == null) {
             return false;
-        } else if (resource.getResourcePath()
-            .endsWith(".png")) {
-                return getImage(resource) != null;
-            } else if (resource.getResourcePath()
-                .endsWith(".properties")) {
-                    return getProperties(resource) != null;
-                } else {
-                    InputStream is = getInputStream(resource);
-                    MCPatcherUtils.close(is);
-                    return is != null;
-                }
+        } else if (resource.getResourcePath().endsWith(".png")) {
+            return getImage(resource) != null;
+        } else if (resource.getResourcePath().endsWith(".properties")) {
+            return getProperties(resource) != null;
+        } else {
+            InputStream is = getInputStream(resource);
+            MCPatcherUtils.close(is);
+            return is != null;
+        }
     }
 
+    @SuppressWarnings("unused")
     public static boolean hasCustomResource(ResourceLocation resource) {
         InputStream jar = null;
         InputStream pack = null;
@@ -161,7 +146,7 @@ public class TexturePackAPI {
             try {
                 image = ImageIO.read(input);
             } catch (IOException e) {
-                logger.error("could not read %s", resource);
+                logger.error("Could not read %s", resource);
                 e.printStackTrace();
             } finally {
                 MCPatcherUtils.close(input);
@@ -188,7 +173,7 @@ public class TexturePackAPI {
                     return true;
                 }
             } catch (IOException e) {
-                logger.error("could not read %s", resource);
+                logger.error("Could not read %s", resource);
                 e.printStackTrace();
             } finally {
                 MCPatcherUtils.close(input);
@@ -200,8 +185,7 @@ public class TexturePackAPI {
     public static ResourceLocation transformResourceLocation(ResourceLocation resource, String oldExt, String newExt) {
         return new ResourceLocation(
             resource.getResourceDomain(),
-            resource.getResourcePath()
-                .replaceFirst(Pattern.quote(oldExt) + "$", newExt));
+            resource.getResourcePath().replaceFirst(Pattern.quote(oldExt) + "$", newExt));
     }
 
     public static ResourceLocation parsePath(String path) {
@@ -284,35 +268,30 @@ public class TexturePackAPI {
         if (resource == null) {
             return -1;
         }
-        ITextureObject texture = Minecraft.getMinecraft()
-            .getTextureManager()
-            .getTexture(resource);
+        TextureObject texture = Minecraft.getMinecraft().getTextureManager().getTexture(resource);
         return texture instanceof AbstractTexture ? texture.getGlTextureId() : -1;
     }
 
+    @SuppressWarnings("unused")
     public static boolean isTextureLoaded(ResourceLocation resource) {
         return getTextureIfLoaded(resource) >= 0;
     }
 
-    public static ITextureObject getTextureObject(ResourceLocation resource) {
-        return Minecraft.getMinecraft()
-            .getTextureManager()
-            .getTexture(resource);
+    @SuppressWarnings("unused")
+    public static TextureObject getTextureObject(ResourceLocation resource) {
+        return Minecraft.getMinecraft().getTextureManager().getTexture(resource);
     }
 
     public static void bindTexture(ResourceLocation resource) {
         if (resource != null) {
-            Minecraft.getMinecraft()
-                .getTextureManager()
-                .bindTexture(resource);
+            Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
         }
     }
 
     public static void unloadTexture(ResourceLocation resource) {
         if (resource != null) {
-            TextureManager textureManager = Minecraft.getMinecraft()
-                .getTextureManager();
-            ITextureObject texture = textureManager.getTexture(resource);
+            TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
+            TextureObject texture = textureManager.getTexture(resource);
             if (texture != null && !(texture instanceof TextureMap) && !(texture instanceof DynamicTexture)) {
                 if (texture instanceof AbstractTexture) {
                     ((AbstractTextureExpansion) texture).unloadGLTexture();
@@ -323,17 +302,16 @@ public class TexturePackAPI {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public static void flushUnusedTextures() {
-        TextureManager textureManager = Minecraft.getMinecraft()
-            .getTextureManager();
+        TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
         if (textureManager != null) {
             Set<ResourceLocation> texturesToUnload = new HashSet<>();
-            Set<Map.Entry<ResourceLocation, ITextureObject>> entrySet = textureManager.mapTextureObjects.entrySet();
-            for (Map.Entry<ResourceLocation, ITextureObject> entry : entrySet) {
+            Set<Map.Entry<ResourceLocation, TextureObject>> entrySet = textureManager.mapTextureObjects.entrySet();
+            for (Map.Entry<ResourceLocation, TextureObject> entry : entrySet) {
                 ResourceLocation resource = entry.getKey();
-                ITextureObject texture = entry.getValue();
-                if (texture instanceof SimpleTexture && !(texture instanceof ThreadDownloadImageData)
-                    && !TexturePackAPI.hasResource(resource)) {
+                TextureObject texture = entry.getValue();
+                if (texture instanceof SimpleTexture && !TexturePackAPI.hasResource(resource)) {
                     texturesToUnload.add(resource);
                 }
             }
@@ -343,8 +321,7 @@ public class TexturePackAPI {
         }
     };
 
-    private static IResourceManager getResourceManager() {
-        return Minecraft.getMinecraft()
-            .getResourceManager();
+    private static ResourceManager getResourceManager() {
+        return Minecraft.getMinecraft().getResourceManager();
     }
 }

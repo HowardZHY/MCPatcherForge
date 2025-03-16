@@ -13,7 +13,7 @@ public abstract class MixinTextureAtlasSprite {
 
     // In 1.6 this is a List<int[]>
     @Shadow
-    public List<int[][]> framesTextureData;
+    protected List<int[]> framesTextureData;
 
     /**
      * @author Mist475 (adapted from Paul Rupe)

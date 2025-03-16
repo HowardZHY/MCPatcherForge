@@ -29,7 +29,7 @@ public abstract class MixinRenderLiving extends RendererLivingEntity {
      */
     @SuppressWarnings("DuplicatedCode")
     @Overwrite
-    protected void func_110827_b(EntityLiving entityLiving, double x, double y, double z, float n, float n2) {
+    public void func_110827_b(EntityLiving entityLiving, double x, double y, double z, float n, float n2) {
         Entity entity = entityLiving.getLeashedToEntity();
 
         if (entity != null) {

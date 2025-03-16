@@ -20,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 /**
  * Collection of static methods available to mods at runtime.
  */
+@SuppressWarnings("unused")
 public class MCPatcherUtils {
 
     private static File minecraftDir;

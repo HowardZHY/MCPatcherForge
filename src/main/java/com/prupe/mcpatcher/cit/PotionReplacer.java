@@ -117,11 +117,13 @@ class PotionReplacer {
         return properties;
     }
 
+    @SuppressWarnings("all")
     private static Properties newProperties(ResourceLocation path, String itemID, boolean splash) {
         String layer = splash ? LAYER_POTION_SPLASH : LAYER_POTION_DRINKABLE;
         return newProperties(path, itemID, layer);
     }
 
+    @SuppressWarnings("all")
     private void registerPotionsByEffect(boolean splash) {
         for (int effect = 0; effect < Potion.potionTypes.length; effect++) {
             if (Potion.potionTypes[effect] == null) {

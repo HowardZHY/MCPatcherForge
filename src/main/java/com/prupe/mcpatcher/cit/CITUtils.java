@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
 import com.prupe.mcpatcher.MCPatcherConfig;
@@ -36,8 +36,7 @@ public class CITUtils {
 
     static final String CIT_PROPERTIES = "cit.properties";
     private static final ResourceLocation CIT_PROPERTIES1 = TexturePackAPI.newMCPatcherResourceLocation(CIT_PROPERTIES);
-    private static final ResourceLocation CIT_PROPERTIES2 = TexturePackAPI
-        .newMCPatcherResourceLocation("cit/" + CIT_PROPERTIES);
+    private static final ResourceLocation CIT_PROPERTIES2 = TexturePackAPI.newMCPatcherResourceLocation("cit/" + CIT_PROPERTIES);
     static final ResourceLocation FIXED_ARMOR_RESOURCE = new ResourceLocation("textures/models/armor/iron_layer_1.png");
 
     static final int MAX_ENCHANTMENTS = 256;
@@ -64,8 +63,8 @@ public class CITUtils {
 
     private static ItemStack lastItemStack;
     private static int lastRenderPass;
-    static IIcon lastOrigIcon;
-    private static IIcon lastIcon;
+    static Icon lastOrigIcon;
+    private static Icon lastIcon;
 
     public static void init() {
         TexturePackChangeHandler.register(new TexturePackChangeHandler(MCPatcherUtils.CUSTOM_ITEM_TEXTURES, 3) {
@@ -102,7 +101,7 @@ public class CITUtils {
 
                 if (enableItems || enableEnchantments || enableArmor) {
                     for (ResourceLocation resource : ResourceList.getInstance()
-                        .listResources(TexturePackAPI.MCPATCHER_SUBDIR + "cit", ".properties", true)) {
+                            .listResources(TexturePackAPI.MCPATCHER_SUBDIR + "cit", ".properties", true)) {
                         registerOverride(OverrideBase.create(resource));
                     }
                     if (enableItems) {
@@ -146,8 +145,7 @@ public class CITUtils {
                     } else {
                         logger.severe(
                             "unknown ItemOverride type %d",
-                            override.getClass()
-                                .getName());
+                            override.getClass().getName());
                         return;
                     }
                     if (override.items == null) {
@@ -177,7 +175,7 @@ public class CITUtils {
         });
     }
 
-    public static IIcon getIcon(IIcon icon, ItemStack itemStack, int renderPass) {
+    public static Icon getIcon(Icon icon, ItemStack itemStack, int renderPass) {
         if (icon == lastIcon && itemStack == lastItemStack && renderPass == lastRenderPass) {
             return icon;
         }
@@ -187,7 +185,7 @@ public class CITUtils {
         if (enableItems) {
             ItemOverride override = findItemOverride(itemStack);
             if (override != null) {
-                IIcon newIcon = override.getReplacementIcon(icon);
+                Icon newIcon = override.getReplacementIcon(icon);
                 if (newIcon != null) {
                     lastIcon = newIcon;
                 }
@@ -196,7 +194,7 @@ public class CITUtils {
         return lastIcon;
     }
 
-    public static IIcon getEntityIcon(IIcon icon, Entity entity) {
+    public static Icon getEntityIcon(Icon icon, Entity entity) {
         if (entity instanceof EntityPotion) {
             EntityPotion potion = (EntityPotion) entity;
             return getIcon(icon, potion.potionDamage, 1);
@@ -204,8 +202,8 @@ public class CITUtils {
         return icon;
     }
 
-    public static ResourceLocation getArmorTexture(ResourceLocation texture, EntityLivingBase entity,
-        ItemStack itemStack) {
+    @SuppressWarnings("unused")
+    public static ResourceLocation getArmorTexture(ResourceLocation texture, EntityLivingBase entity, ItemStack itemStack) {
         if (enableArmor) {
             ArmorOverride override = findArmorOverride(itemStack);
             if (override != null) {
@@ -218,6 +216,7 @@ public class CITUtils {
         return texture;
     }
 
+    @SuppressWarnings("deprecation")
     private static <T extends OverrideBase> T findMatch(Map<Item, List<T>> overrides, ItemStack itemStack) {
         Item item = itemStack.getItem();
         List<T> list = overrides.get(item);
@@ -295,7 +294,7 @@ public class CITUtils {
     }
 
     public static boolean setupArmorEnchantments(EntityLivingBase entity, int pass) {
-        return setupArmorEnchantments(entity.getEquipmentInSlot(4 - pass));
+        return setupArmorEnchantments(entity.getCurrentItemOrArmor(4 - pass));
     }
 
     public static boolean setupArmorEnchantments(ItemStack itemStack) {

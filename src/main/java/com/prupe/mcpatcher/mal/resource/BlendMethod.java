@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.prupe.mcpatcher.MCPatcherUtils;
 
+@SuppressWarnings("unused")
 public class BlendMethod {
 
     private static final Set<ResourceLocation> blankResources = new HashSet<>();

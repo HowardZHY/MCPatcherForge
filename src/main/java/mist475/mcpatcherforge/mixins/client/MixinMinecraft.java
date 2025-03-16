@@ -1,6 +1,5 @@
 package mist475.mcpatcherforge.mixins.client;
 
-import com.google.common.collect.Multimap;
 import com.prupe.mcpatcher.MCPatcherUtils;
 import com.prupe.mcpatcher.cit.CITUtils;
 import com.prupe.mcpatcher.mal.resource.TexturePackChangeHandler;
@@ -15,9 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.io.File;
 import java.net.Proxy;
 
-@SuppressWarnings("all")
 @Mixin(Minecraft.class)
-public abstract class MixinMinecraft{
+public abstract class MixinMinecraft {
 
     @Inject(
         method = "<init>(Lnet/minecraft/util/Session;IIZZLjava/io/File;Ljava/io/File;Ljava/io/File;Ljava/net/Proxy;Ljava/lang/String;)V",
@@ -30,7 +28,7 @@ public abstract class MixinMinecraft{
         method = "startGame()V",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/client/resources/IReloadableResourceManager;registerReloadListener(Lnet/minecraft/client/resources/IResourceManagerReloadListener;)V",
+            target = "Lnet/minecraft/client/resources/ReloadableResourceManager;registerReloadListener(Lnet/minecraft/client/resources/ResourceManagerReloadListener;)V",
             ordinal = 0))
     private void modifyStartGame1(CallbackInfo ci) {
         TileLoader.init();
@@ -41,7 +39,7 @@ public abstract class MixinMinecraft{
         method = "startGame()V",
         at = @At(
             value = "INVOKE",
-            target = "Lcpw/mods/fml/client/FMLClientHandler;beginMinecraftLoading(Lnet/minecraft/client/Minecraft;Ljava/util/List;Lnet/minecraft/client/resources/IReloadableResourceManager;)V",
+            target = "Lcpw/mods/fml/client/FMLClientHandler;beginMinecraftLoading(Lnet/minecraft/client/Minecraft;Ljava/util/List;Lnet/minecraft/client/resources/ReloadableResourceManager;)V",
             remap = false,
             shift = At.Shift.AFTER))
     private void modifyStartGame2(CallbackInfo ci) {

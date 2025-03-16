@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import net.minecraft.client.resources.IResourcePack;
+import net.minecraft.client.resources.ResourcePack;
 
 import com.prupe.mcpatcher.MCLogger;
 
@@ -89,10 +89,9 @@ abstract public class TexturePackChangeHandler implements Comparable<TexturePack
         Runtime runtime = Runtime.getRuntime();
         startMem = runtime.totalMemory() - runtime.freeMemory();
         ResourceList.clearInstance();
-        List<IResourcePack> resourcePacks = TexturePackAPI.getResourcePacks(null);
-        logger
-            .fine("%s resource packs (%d selected):", initialized ? "changing" : "initializing", resourcePacks.size());
-        for (IResourcePack pack : resourcePacks) {
+        List<ResourcePack> resourcePacks = TexturePackAPI.getResourcePacks(null);
+        logger.fine("%s resource packs (%d selected):", initialized ? "changing" : "initializing", resourcePacks.size());
+        for (ResourcePack pack : resourcePacks) {
             logger.fine("resource pack: %s", pack.getPackName());
         }
         Set<String> namespaces = TexturePackAPI.getNamespaces();

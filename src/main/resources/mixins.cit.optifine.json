@@ -7,7 +7,7 @@
   "plugin": "mist475.mcpatcherforge.core.CITOptiFineMixinPlugin",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "MixinTextureMap",
-    "MixinItemRendererOF"
+    "MixinItemRendererOF",
+    "MixinTextureMap"
   ]
 }

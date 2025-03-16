@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.IIcon;
+import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -141,7 +141,7 @@ final class Enchantment extends OverrideBase {
         end();
     }
 
-    boolean bindTexture(IIcon icon) {
+    boolean bindTexture(Icon icon) {
         ResourceLocation texture;
         if (alternateTextures != null && icon != null) {
             texture = alternateTextures.get(icon.getIconName());

@@ -1,13 +1,12 @@
 package mist475.mcpatcherforge;
 
 import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.network.NetworkMod;
 
 @Mod(
     modid = "cit",
-    version = "preview-1.7.10",
-    name = Tags.MODNAME,
-    acceptedMinecraftVersions = "*",
-    acceptableRemoteVersions = "*"
+    version = "1.6.4",
+    acceptedMinecraftVersions = "*"
 )
-public class CITForge {
-}
+@NetworkMod(clientSideRequired = false, serverSideRequired = false)
+public class CITForge {}
