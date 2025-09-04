@@ -44,6 +44,7 @@ final class EnchantmentList {
         }
     }
 
+    @SuppressWarnings("deprecation")
     EnchantmentList(Map<Item, List<Enchantment>> enchantments, List<Enchantment> allItemEnchantments,
         ItemStack itemStack) {
         BitSet layersPresent = new BitSet();
@@ -119,10 +120,12 @@ final class EnchantmentList {
         protected void scaleIntensities(EnchantmentList enchantments, int denominator) {
             if (denominator > 0) {
                 for (Layer layer : enchantments.layers) {
-                    if (layer.enchantment.blendMethod.canFade()) {
-                        layer.intensity = (float) layer.level / (float) denominator;
-                    } else {
-                        layer.intensity = layer.level > 0 ? 1.0f : 0.0f;
+                    if (layer.enchantment.blendMethod != null) {
+                        if (layer.enchantment.blendMethod.canFade()) {
+                            layer.intensity = (float) layer.level / (float) denominator;
+                        } else {
+                            layer.intensity = layer.level > 0 ? 1.0f : 0.0f;
+                        }
                     }
                 }
             } else {
@@ -139,7 +142,7 @@ final class EnchantmentList {
         void computeIntensities(EnchantmentList enchantments) {
             int total = 0;
             for (Layer layer : enchantments.layers) {
-                if (layer.enchantment.blendMethod.canFade()) {
+                if (layer.enchantment.blendMethod != null && layer.enchantment.blendMethod.canFade()) {
                     total += layer.level;
                 }
             }
@@ -153,7 +156,7 @@ final class EnchantmentList {
         void computeIntensities(EnchantmentList enchantments) {
             int max = 0;
             for (Layer layer : enchantments.layers) {
-                if (layer.enchantment.blendMethod.canFade()) {
+                if (layer.enchantment.blendMethod != null && layer.enchantment.blendMethod.canFade()) {
                     // TODO: check if this is meant, there was no assignment here for some reason
                     max = Math.max(max, layer.level);
                 }
@@ -168,13 +171,13 @@ final class EnchantmentList {
         void computeIntensities(EnchantmentList enchantments) {
             float total = 0.0f;
             for (Layer layer : enchantments.layers) {
-                if (layer.enchantment.blendMethod.canFade()) {
+                if (layer.enchantment.blendMethod != null && layer.enchantment.blendMethod.canFade()) {
                     total += layer.getEffectiveDuration();
                 }
             }
             float timestamp = (float) ((System.currentTimeMillis() / 1000.0) % total);
             for (Layer layer : enchantments.layers) {
-                if (!layer.enchantment.blendMethod.canFade()) {
+                if (layer.enchantment.blendMethod != null && !layer.enchantment.blendMethod.canFade()) {
                     layer.intensity = layer.level > 0 ? 1.0f : 0.0f;
                     continue;
                 }

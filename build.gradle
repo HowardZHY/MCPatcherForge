@@ -1,7 +1,6 @@
-
 plugins {
     id 'java'
-    id 'xyz.wagyourtail.unimined' version '1.3.12'
+    id 'xyz.wagyourtail.unimined' version '1.3.15'
     id 'com.github.johnrengelman.shadow' version "8.1.1"
 }
 
@@ -34,8 +33,7 @@ unimined.minecraft {
     //defaultRemapJar = false
     remap(tasks.shadowJar) {
         prodNamespace("searge")
-        mixinRemap {
-        }
+        mixinRemap {}
     }
 }
 
@@ -54,6 +52,10 @@ configurations {
     compile.extendsFrom shade
 }
 
+private static boolean mixinLess() {
+    return false
+}
+
 dependencies {
     compileOnly('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         // Mixin includes a lot of dependencies that are too up-to-date
@@ -62,6 +64,11 @@ dependencies {
         exclude module: 'gson'
         exclude module: 'commons-io'
     }
+    compileOnly('org.apache.logging.log4j:log4j-core:2.3.2')
+    compileOnly('org.apache.logging.log4j:log4j-api:2.3.2')
+    if (mixinLess()) {
+        return
+    }
     shade('org.spongepowered:mixin:0.7.11-SNAPSHOT') {
         // Mixin includes a lot of dependencies that are too up-to-date
         exclude module: 'launchwrapper'
@@ -69,8 +76,6 @@ dependencies {
         exclude module: 'gson'
         exclude module: 'commons-io'
     }
-    compileOnly('org.apache.logging.log4j:log4j-core:2.3.2')
-    compileOnly('org.apache.logging.log4j:log4j-api:2.3.2')
     shade('org.apache.logging.log4j:log4j-core:2.3.2')
     shade('org.apache.logging.log4j:log4j-api:2.3.2')
     shade('org.ow2.asm:asm-all:5.2')
@@ -88,7 +93,7 @@ jar {
     manifest {
         attributes([
                 "FMLAT": "cit_at.cfg",
-                "FMLCorePlugin": "mist475.mcpatcherforge.core.CITForgeCore",
+                "FMLCorePlugin": getCorePlugin(),
                 "FMLCorePluginContainsFMLMod": "true",
                 "ForceLoadAsMod": "true",
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
@@ -99,16 +104,21 @@ jar {
     }
 }
 
-shadowJar {
-    dependencies {
-        //exclude(dependency("com.google.code.gson:gson:2.8.6"))
+private static String getCorePlugin() {
+    if (mixinLess()) {
+        return "mist475.mcpatcherforge.core.CITForgeCoreLess"
     }
+    return "mist475.mcpatcherforge.core.CITForgeCore"
+}
+
+shadowJar {
+    dependencies {}
     configurations = [project.configurations.shade]
     duplicatesStrategy DuplicatesStrategy.EXCLUDE
 }
 
 tasks.jar {
-    enabled = false
+    //enabled = false
 }
 
 tasks.shadowJar {
