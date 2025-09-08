@@ -96,8 +96,8 @@ jar {
                 "FMLCorePlugin": getCorePlugin(),
                 "FMLCorePluginContainsFMLMod": "true",
                 "ForceLoadAsMod": "true",
-                "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
-                "TweakOrder": "-1000",
+                //"TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
+                //"TweakOrder": "-1000",
                 "MixinConfigs": "mixins.cit.client.json",
                 "Manifest-Version": 1.0
         ])
